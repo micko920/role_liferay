@@ -20,17 +20,17 @@
     mode: 0700
     recurse: true
 
-# - name: Get the Liferay Bundle
-#   unarchive:
-#     src: "{{ liferay_url }}"
-#     remote_src: yes
-#     dest: "{{ liferay_dest }}"
-#     owner: "{{ liferay_user }}"
-#     group: "{{ liferay_group }}"
-#     mode: 0755
-#   register: install_liferay
-#   until: install_liferay is succeeded
-#   retries: 3
+- name: Get the Liferay Bundle
+  unarchive:
+    src: "{{ liferay_url }}"
+    remote_src: yes
+    dest: "{{ liferay_dest }}"
+    owner: "{{ liferay_user }}"
+    group: "{{ liferay_group }}"
+    mode: 0755
+  register: install_liferay
+  until: install_liferay is succeeded
+  retries: 3
 
 - name: configure liferay instance - portal-ext.properties
   template:
