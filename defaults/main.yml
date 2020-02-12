@@ -2,4 +2,4 @@
 
 liferay_user: "liferay"
 liferay_group: "liferay"
-liferay_final_state: "stop"
+liferay_final_state: "stopped"
