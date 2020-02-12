@@ -20,14 +20,17 @@
     mode: 0700
     recurse: true
 
-- name: Get the Liferay Bundle
-  unarchive:
-    src: "{{ liferay_url }}"
-    remote_src: yes
-    dest: "{{ liferay_dest }}"
-    owner: "{{ liferay_user }}"
-    group: "{{ liferay_group }}"
-    mode: 0755
+# - name: Get the Liferay Bundle
+#   unarchive:
+#     src: "{{ liferay_url }}"
+#     remote_src: yes
+#     dest: "{{ liferay_dest }}"
+#     owner: "{{ liferay_user }}"
+#     group: "{{ liferay_group }}"
+#     mode: 0755
+#   register: install_liferay
+#   until: install_liferay is succeeded
+#   retries: 3
 
 - name: configure liferay instance - portal-ext.properties
   template:
@@ -43,6 +46,9 @@
     service_list:
       - name: "{{ liferay_service_name }}"
         description: "{{ liferay_service_description }}"
-        start_command: "{{ liferay_tomcat_home }}/bin/catalina.sh run"
+        start_command: "{{ liferay_tomcat_home }}/bin/startup.sh"
+        stop_command: "{{ liferay_tomcat_home }}/bin/shutdown.sh"
         user_name: "{{ liferay_user }}"
         group_name: "{{ liferay_group }}"
+        type: "forking"
+        after: "syslog.target network.target"
