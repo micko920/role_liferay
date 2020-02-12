@@ -1,0 +1,3 @@
+../../homelab_base_system/molecule/docker docker
+../../homelab_base_system/molecule/vagrant vagrant
+../../homelab_base_system/molecule/aws-ec2 aws-ec2

@@ -1,0 +1,10 @@
+---
+# handlers file for liferay
+- name: systemctl daemon-reload
+  systemd:
+    daemon_reload: yes
+
+- name: restart liferay instance
+  service:
+    name: "{{ lifera_service_name }}"
+    state: restarted

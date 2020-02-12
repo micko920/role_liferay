@@ -1,0 +1,48 @@
+---
+- name: Add the liferay group
+  group:
+    name: "{{ liferay_group }}"
+    state: present
+
+- name: Add the liferay user
+  user:
+    name: "{{ liferay_user }}"
+    password_lock: true
+    shell: /bin/bash
+    append: yes
+
+- name: Ensure dest exists
+  file:
+    path: "{{ liferay_dest }}"
+    owner: "{{ liferay_user }}"
+    group: "{{ liferay_group }}"
+    state: directory
+    mode: 0700
+    recurse: true
+
+- name: Get the Liferay Bundle
+  unarchive:
+    src: "{{ liferay_url }}"
+    remote_src: yes
+    dest: "{{ liferay_dest }}"
+    owner: "{{ liferay_user }}"
+    group: "{{ liferay_group }}"
+    mode: 0755
+
+- name: configure liferay instance - portal-ext.properties
+  template:
+    src: portal-ext.properties.j2
+    dest: "{{ liferay_home }}/portal-ext.properties"
+
+# Run life service
+# ${LIFERAY_HOME}/tomcat/bin/catalina.sh run
+- name: create liferay service instance
+  import_role:
+    name: micko920.role_createservice
+  vars:
+    service_list:
+      - name: "{{ liferay_service_name }}"
+        description: "{{ liferay_service_description }}"
+        start_command: "{{ liferay_tomcat_home }}/bin/catalina.sh run"
+        user_name: "{{ liferay_user }}"
+        group_name: "{{ liferay_group }}"
