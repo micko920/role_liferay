@@ -1,0 +1,27 @@
+---
+- name: Ensure dest exists
+  file:
+    path: "{{ liferay_dest }}"
+    state: directory
+    recurse: true
+
+- name: Debug the version
+  debug: var=liferay_version
+
+- name: Debug the url
+  debug: var=liferay_url
+
+- name: Debug the archives
+  debug: var=liferay_archives
+
+- name: Debug the test
+  debug: var=something_at_the_end
+
+- name: Get the Liferay Bundle
+  get_url:
+    url: "{{ liferay_url }}"
+    dest: "{{ liferay_dest }}"
+    mode: 0755
+
+- include_tasks: setup-Debian.yml
+  when: ansible_os_family == 'Debian'
