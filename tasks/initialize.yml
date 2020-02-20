@@ -9,7 +9,19 @@
     name: "{{ liferay_user }}"
     password_lock: true
     shell: /bin/bash
-    append: yes
+    append: true
+
+- name: Check to see if already installed
+  stat:
+    path: "{{ liferay_dest }}"
+  register: stat_liferay_dest
+
+- name: Set new install flag
+  set_fact:
+    new_liferay_dest: true
+  when:
+    - stat_liferay_dest.stat.exists is defined
+    - not stat_liferay_dest.stat.exists
 
 - name: Ensure dest exists
   file:
@@ -19,11 +31,12 @@
     state: directory
     mode: 0700
     recurse: true
+  when: new_liferay_dest is defined
 
 - name: Get the Liferay Bundle
   unarchive:
     src: "{{ liferay_url }}"
-    remote_src: yes
+    remote_src: true
     dest: "{{ liferay_dest }}"
     owner: "{{ liferay_user }}"
     group: "{{ liferay_group }}"
@@ -31,6 +44,7 @@
   register: install_liferay
   until: install_liferay is succeeded
   retries: 3
+  when: new_liferay_dest is defined
 
 - name: configure liferay instance - portal-ext.properties
   template:
