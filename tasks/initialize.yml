@@ -56,6 +56,16 @@
     src: com.liferay.portal.search.elasticsearch6.configuration.ElasticsearchConfiguration.config.j2
     dest: "{{ liferay_home }}/osgi/configs/com.liferay.portal.search.elasticsearch6.configuration.ElasticsearchConfiguration.config"
 
+- name: Check the content
+  slurp:
+    src: "{{ liferay_home }}/osgi/configs/com.liferay.portal.search.elasticsearch6.configuration.ElasticsearchConfiguration.config"
+  register: new_config_file_content
+
+- name: Decode data and store as fact
+  set_fact:
+    config_data: "{{ new_config_file_content.content | b64decode }}"
+
+
 - name: configure liferay document store osgi config
   template:
     src: com.liferay.portal.store.file.system.configuration.AdvancedFileSystemStoreConfiguration.cfg.j2
