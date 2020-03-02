@@ -1,3 +1,4 @@
 operationMode="REMOTE"
-transportAddresses=[ {{ elasticsearch_cluster_addresses | join(',') }} ]
+this_is_test="michael other"
+transportAddresses=[ {{ elasticsearch_cluster_addresses| map("to_json") | join(',') }} ]
 clusterName={{ elasticsearch_cluster_name }}
