@@ -15,7 +15,7 @@ liferay_archives:
     file_type: "tar.gz"
     url_path: "7.3.0-ga1"
     file: "liferay-ce-portal-tomcat-7.3.0-ga1-20200127150653953.tar.gz"
-    directory: "liferay-ce-portal-7.2.1-ga2"
+    directory: "liferay-ce-portal-7.3.0-ga1"
   "7.2":
     mirror: "https://downloads.sourceforge.net/project/lportal/Liferay%20Portal"
     version: "7.2.1"
