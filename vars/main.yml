@@ -1,11 +1,23 @@
 ---
-  # https://downloads.sourceforge.net/project/lportal/Liferay%20Portal/7.2.1%20GA2/liferay-ce-portal-tomcat-7.2.1-ga2-20191111141448326.7z
-
-liferay_mirror: "https://downloads.sourceforge.net/project/lportal/Liferay%20Portal"
 
 # vars file for liferay
 liferay_archives:
+  "7.3":
+    mirror: "https://github.com/liferay/liferay-portal/releases/download/7.3.0-ga1"
+    version: "7.3.0"
+    tomcat:
+      version: "9.0.17"
+      directory: "tomcat-9.0.17"
+    release: "GA1"
+    edition: "ce"
+    bundle_type: "tomcat"
+    tag: "20200127150653953"
+    file_type: "tar.gz"
+    url_path: "7.3.0-ga1"
+    file: "liferay-ce-portal-tomcat-7.3.0-ga1-20200127150653953.tar.gz"
+    directory: "liferay-ce-portal-7.2.1-ga2"
   "7.2":
+    mirror: "https://downloads.sourceforge.net/project/lportal/Liferay%20Portal"
     version: "7.2.1"
     tomcat:
       version: "9.0.17"
@@ -19,10 +31,13 @@ liferay_archives:
     file: "liferay-ce-portal-tomcat-7.2.1-ga2-20191111141448326.tar.gz"
     directory: "liferay-ce-portal-7.2.1-ga2"
 
+liferay_mirror: "{{ liferay_archives[liferay_version]['mirror'] }}"
+
 # yamllint disable-line rule:line-length
 liferay_url: "{{ liferay_mirror }}/{{ liferay_archives[liferay_version]['url_path'] }}/{{ liferay_archives[liferay_version]['file'] }}"   # noqa 204
 
 liferay_home: "{{ liferay_dest }}/{{ liferay_archives[liferay_version]['directory'] }}"   # noqa 204
+liferay_deploy: "{{ liferay_home }}/deploy"
 liferay_tomcat_home: "{{ liferay_home }}/{{ liferay_archives[liferay_version]['tomcat']['directory'] }}" # noqa 204
 
 liferay_service_name: "tomcat-liferay"

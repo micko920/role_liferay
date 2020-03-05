@@ -51,26 +51,32 @@
     src: portal-ext.properties.j2
     dest: "{{ liferay_home }}/portal-ext.properties"
 
-- name: configure liferay portal search osgi config
+- name: configure liferay portal config
   template:
-    src: com.liferay.portal.search.elasticsearch6.configuration.ElasticsearchConfiguration.config.j2
-    dest: "{{ liferay_home }}/osgi/configs/com.liferay.portal.search.elasticsearch6.configuration.ElasticsearchConfiguration.config"
+    src: "{{ item }}.j2"
+    dest: "{{ liferay_home }}/osgi/configs/{{ item }}"
+  with_items:
+    - com.liferay.portal.search.elasticsearch7.configuration.ElasticsearchConfiguration.config
+    - com.liferay.portal.store.file.system.configuration.AdvancedFileSystemStoreConfiguration.cfg
 
-- name: Check the content
-  slurp:
-    src: "{{ liferay_home }}/osgi/configs/com.liferay.portal.search.elasticsearch6.configuration.ElasticsearchConfiguration.config"
-  register: new_config_file_content
+- name: Copy plugins for deployment
+  copy:
+    src: "{{ item }}"
+    dest: "{{ liferay_deploy }}/{{ item }}"
+    owner: "{{ liferay_user }}"
+    group: "{{ liferay_group }}"
+  with_items:
+    - "Liferay CE Connector to Elasticsearch 7.lpkg"
 
-- name: Decode data and store as fact
-  set_fact:
-    config_data: "{{ new_config_file_content.content | b64decode }}"
 
+#- name: Check the content
+#   slurp:
+#     src: "{{ liferay_home }}/osgi/configs/com.liferay.portal.search.elasticsearch6.configuration.ElasticsearchConfiguration.config"
+#   register: new_config_file_content
 
-- name: configure liferay document store osgi config
-  template:
-    src: com.liferay.portal.store.file.system.configuration.AdvancedFileSystemStoreConfiguration.cfg.j2
-    dest: "{{ liferay_home }}/osgi/configs/com.liferay.portal.store.file.system.configuration.AdvancedFileSystemStoreConfiguration.cfg"
-
+# - name: Decode data and store as fact
+#   set_fact:
+#     config_data: "{{ new_config_file_content.content | b64decode }}"
 
 # Run life service
 # ${LIFERAY_HOME}/tomcat/bin/catalina.sh run
