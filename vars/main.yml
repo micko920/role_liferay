@@ -3,7 +3,7 @@
 # vars file for liferay
 liferay_archives:
   "7.3":
-    mirror: "https://github.com/liferay/liferay-portal/releases/download/7.3.0-ga1"
+    mirror: "https://github.com/liferay/liferay-portal/releases/download"
     version: "7.3.0"
     tomcat:
       version: "9.0.17"
