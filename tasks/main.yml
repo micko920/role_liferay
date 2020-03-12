@@ -4,10 +4,6 @@
 # Variable configuration.
 - include_tasks: variables.yml
 
-# Setup/install tasks.
-- include_tasks: setup-Debian.yml
-  when: ansible_os_family == 'Debian'
-
 - include_tasks: initialize.yml
 
 - name: Set final state and enable liferay instance
