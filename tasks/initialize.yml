@@ -33,6 +33,16 @@
     recurse: true
   when: new_liferay_dest is defined
 
+- name: Ensure data directory exists
+  file:
+    path: "{{ liferay_document_library_root }}"
+    owner: "{{ liferay_user }}"
+    group: "{{ liferay_group }}"
+    state: directory
+    mode: 0700
+    recurse: true
+  when: new_liferay_dest is defined
+
 - name: Get the Liferay Bundle
   unarchive:
     src: "{{ liferay_url }}"
