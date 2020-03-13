@@ -60,15 +60,25 @@
     - com.liferay.portal.search.elasticsearch7.configuration.ElasticsearchConfiguration.config
     - com.liferay.portal.store.file.system.configuration.AdvancedFileSystemStoreConfiguration.cfg
 
+# This does not for with git-lfs
+# - name: Copy plugins for deployment
+#   copy:
+#     src: "{{ item }}"
+#     dest: "{{ liferay_deploy }}/{{ item }}"
+#     owner: "{{ liferay_user }}"
+#     group: "{{ liferay_group }}"
+#   with_items:
+#     - Liferay CE Connector to Elasticsearch 7.lpkg
+
+# Hack to make the role get the git-lfs file not the placeholder
 - name: Copy plugins for deployment
-  copy:
-    src: "{{ item }}"
+  get_url:
+    url: "https://github.com/micko920/role_liferay/raw/master/files/{{ item | urlencode }}"
     dest: "{{ liferay_deploy }}/{{ item }}"
     owner: "{{ liferay_user }}"
     group: "{{ liferay_group }}"
   with_items:
     - Liferay CE Connector to Elasticsearch 7.lpkg
-
 
 #- name: Check the content
 #   slurp:
