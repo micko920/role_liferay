@@ -5,6 +5,8 @@ liferay_group: "liferay"
 liferay_final_state: "stopped"
 
 liferay_document_library_root: "/data/liferay/document_library"
+liferay_database: "liferaydb"
+liferay_ip: "192.168.2.124"
 
 elasticsearch_cluster_name: "es_cluster"
 elasticsearch_cluster_addresses:
