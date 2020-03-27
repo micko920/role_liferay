@@ -68,7 +68,7 @@
   with_items:
     - com.liferay.portal.store.file.system.configuration.AdvancedFileSystemStoreConfiguration.cfg
 
-- name: configure liferay portal config
+- name: configure liferay elasticsearch config
   template:
     src: "{{ item }}.j2"
     dest: "{{ liferay_home }}/osgi/configs/{{ item }}"
