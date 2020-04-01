@@ -98,6 +98,16 @@
     - Liferay CE Connector to Elasticsearch 7.lpkg
   when: liferay_version is defined and liferay_version == '7.3'
 
+- name: Remove ElasticSearch 6 plugin
+  file:
+    path: "{{ liferay_home }}/osgi/marketplace/{{ item }}"
+    state: absent
+  with_items:
+    - Liferay CE Foundation - Liferay CE Connector to Elasticsearch 6 - API.lpkg
+    - Liferay CE Foundation - Liferay CE Connector to Elasticsearch 6 - Impl.lpkg
+    - Liferay CE Foundation - Liferay CE Connector to Elasticsearch 6 - SPI.lpkg
+  when: liferay_version is defined and liferay_version == '7.3'
+
 #- name: Check the content
 #   slurp:
 #     src: "{{ liferay_home }}/osgi/configs/com.liferay.portal.search.elasticsearch6.configuration.ElasticsearchConfiguration.config"
