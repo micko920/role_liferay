@@ -75,7 +75,7 @@
   with_items:
     - com.liferay.portal.bundle.blacklist.internal.BundleBlacklistConfiguration.config
     - com.liferay.portal.search.elasticsearch7.configuration.ElasticsearchConfiguration.config
-  when: liferay_version is defined and liferay_version == '7.3'
+  when: liferay_version is defined and liferay_version is version('7.3.0', '>=')
 
 # This does not for with git-lfs
 # - name: Copy plugins for deployment
@@ -96,7 +96,7 @@
     group: "{{ liferay_group }}"
   with_items:
     - Liferay CE Connector to Elasticsearch 7.lpkg
-  when: liferay_version is defined and liferay_version == '7.3'
+  when: liferay_version is defined and liferay_version is version('7.3.0', '>=')
 
 - name: Remove ElasticSearch 6 plugin
   file:
@@ -106,7 +106,7 @@
     - Liferay CE Foundation - Liferay CE Connector to Elasticsearch 6 - API.lpkg
     - Liferay CE Foundation - Liferay CE Connector to Elasticsearch 6 - Impl.lpkg
     - Liferay CE Foundation - Liferay CE Connector to Elasticsearch 6 - SPI.lpkg
-  when: liferay_version is defined and liferay_version == '7.3'
+  when: liferay_version is defined and liferay_version is version('7.3.0', '>=')
 
 #- name: Check the content
 #   slurp:
