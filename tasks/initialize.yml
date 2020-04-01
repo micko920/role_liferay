@@ -75,17 +75,10 @@
   with_items:
     - com.liferay.portal.bundle.blacklist.internal.BundleBlacklistConfiguration.config
     - com.liferay.portal.search.elasticsearch7.configuration.ElasticsearchConfiguration.config
-  when: liferay_version is defined and liferay_version is version('7.3.0', '>=')
-
-# This does not for with git-lfs
-# - name: Copy plugins for deployment
-#   copy:
-#     src: "{{ item }}"
-#     dest: "{{ liferay_deploy }}/{{ item }}"
-#     owner: "{{ liferay_user }}"
-#     group: "{{ liferay_group }}"
-#   with_items:
-#     - Liferay CE Connector to Elasticsearch 7.lpkg
+  when:
+    - liferay_version is defined
+    - liferay_version is version('7.3.0', '>=')
+    - elasticsearch_remote_enabled == "true"
 
 # Hack to make the role get the git-lfs file not the placeholder
 - name: Copy plugins for deployment
@@ -96,7 +89,10 @@
     group: "{{ liferay_group }}"
   with_items:
     - Liferay CE Connector to Elasticsearch 7.lpkg
-  when: liferay_version is defined and liferay_version is version('7.3.0', '>=')
+  when:
+    - liferay_version is defined
+    - liferay_version is version('7.3.0', '>=')
+    - elasticsearch_remote_enabled == "true"
 
 - name: Remove ElasticSearch 6 plugin
   file:
@@ -106,7 +102,10 @@
     - Liferay CE Foundation - Liferay CE Connector to Elasticsearch 6 - API.lpkg
     - Liferay CE Foundation - Liferay CE Connector to Elasticsearch 6 - Impl.lpkg
     - Liferay CE Foundation - Liferay CE Connector to Elasticsearch 6 - SPI.lpkg
-  when: liferay_version is defined and liferay_version is version('7.3.0', '>=')
+  when:
+    - liferay_version is defined
+    - liferay_version is version('7.3.0', '>=')
+    - elasticsearch_remote_enabled == "true"
 
 #- name: Check the content
 #   slurp:

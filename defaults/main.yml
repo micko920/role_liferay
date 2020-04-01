@@ -13,3 +13,5 @@ elasticsearch_cluster_name: "es_cluster"
 elasticsearch_cluster_addresses:
   - "es-node-1:9300"
   - "es-node-2:9300"
+
+elasticsearch_remote_enabled: "false"
