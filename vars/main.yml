@@ -2,20 +2,20 @@
 
 # vars file for liferay
 liferay_archives:
-  "7.3.1":
-    mirror: "https://github.com/liferay/liferay-portal/releases/download"
-    version: "7.3.1"
+  "7.3.4":
+    mirror: "https://releases-cdn.liferay.com/portal"
+    version: "7.3.4"
     tomcat:
-      version: "9.0.17"
+      version: "9.0.33"
       directory: "tomcat-9.0.33"
-    release: "GA2"
+    release: "GA5"
     edition: "ce"
     bundle_type: "tomcat"
-    tag: "20200327090859603"
+    tag: "20200811154319029"
     file_type: "tar.gz"
-    url_path: "7.3.1-ga2"
-    file: "liferay-ce-portal-tomcat-7.3.1-ga2-20200327090859603.tar.gz"
-    directory: "liferay-ce-portal-7.3.1-ga2"
+    url_path: "7.3.4-ga5"
+    file: "liferay-ce-portal-tomcat-7.3.4-ga5-20200811154319029.tar.gz"
+    directory: "liferay-ce-portal-7.3.4-ga5"
   "7.3":
     mirror: "https://github.com/liferay/liferay-portal/releases/download"
     version: "7.3.0"

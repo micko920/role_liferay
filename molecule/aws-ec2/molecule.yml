@@ -2,14 +2,12 @@
 dependency:
   name: galaxy
   options:
-    ignore-certs: True
-    ignore-errors: True
+    ignore-certs: true
+    ignore-errors: true
     role-file: molecule/requirements.yml
 
 driver:
   name: ec2
-lint:
-  name: yamllint
 platforms:
   - name: instance
     # Debian Buster ami
@@ -20,10 +18,6 @@ platforms:
     vpc_subnet_id: "${AWS_MOLECULE_SUBNET}"
 provisioner:
   name: ansible
-  lint:
-    name: ansible-lint
   log: true
 verifier:
   name: testinfra
-  lint:
-    name: flake8
