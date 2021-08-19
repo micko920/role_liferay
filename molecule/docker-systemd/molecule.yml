@@ -9,8 +9,8 @@ dependency:
 driver:
   name: docker
 platforms:
-  - name: homelab-systemd-local
-    image: ${MOLECULE_DOCKER_IMAGE:-"homelab-systemd:local"}
+  - name: "homelab-systemd-local-${role_under_test:-norole}"
+    image: "${MOLECULE_DOCKER_SYSTEMD_IMAGE:-homelab-systemd:local}"
     command: "/sbin/init"
     tmpfs:
       - /run
