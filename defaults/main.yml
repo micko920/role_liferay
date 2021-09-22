@@ -7,7 +7,14 @@ liferay_service_enabled: true
 
 liferay_document_library_root: "/data/liferay/document_library"
 liferay_database: "liferaydb"
-liferay_ip: "192.168.2.124"
+admin_email: "admin@liferay.portal.local"
+admin_email_name: "Liferay Administrator"
+cluster_enabled: "false"
+security_mode: "domain"
+domains_allowed: "*.local,localhost"
+ips_allowed: ""
+web_server_hostname: ""
+
 
 elasticsearch_cluster_name: "es_cluster"
 elasticsearch_cluster_addresses:

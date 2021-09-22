@@ -53,6 +53,9 @@ liferay_url: "{{ liferay_mirror }}/{{ liferay_archives[liferay_version]['url_pat
 liferay_home: "{{ liferay_dest }}/{{ liferay_archives[liferay_version]['directory'] }}"   # noqa 204
 liferay_deploy: "{{ liferay_home }}/deploy"
 liferay_tomcat_home: "{{ liferay_home }}/{{ liferay_archives[liferay_version]['tomcat']['directory'] }}" # noqa 204
+liferay_osgi_deploy: "{{ liferay_home }}/osgi/modules"
+liferay_override_deploy: "{{ liferay_home }}/osgi/marketplace/override"
+liferay_war_deploy: "{{ liferay_home }}/osgi/war"
 
 liferay_service_name: "tomcat-liferay"
 liferay_service_description: "Start/Stop Tomcat and Liferay server"

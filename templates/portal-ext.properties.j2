@@ -1,10 +1,12 @@
-  admin.email.from.address=gfoi@enviroaccounts.com
-  admin.email.from.name=GFOI Administrator
+  admin.email.from.address={{ admin_email }}
+  admin.email.from.name={{ admin_email_name }}
 # asset.entry.increment.view.counter.enabled=true
 # blogs.ping.google.enabled=false
 # blogs.pingback.enabled=false
 # blogs.trackback.enabled=false
-  cluster.link.enabled=true
+  cluster.link.enabled={{ cluster_enabled }}
+# Use this to select the device to check for host ip address
+#  cluster.link.autodetect.address=<interface ipaddress>
 # com.liferay.portal.servlet.filters.sso.cas.CASFilter=false
 # com.liferay.portal.servlet.filters.sso.ntlm.NtlmFilter=false
 # com.liferay.portal.servlet.filters.sso.ntlm.NtlmPostFilter=false
@@ -25,7 +27,7 @@
 # company.security.site.logo=true
 # company.security.strangers.verify=false
 # company.security.strangers.with.mx=false
-# company.security.strangers=true
+  company.security.strangers=false
 # counter.increment=2000
 # default.admin.email.address.prefix=liferay_test
 # default.landing.page.path=/frontpage
@@ -92,12 +94,30 @@
 # theme.portlet.decorate.default=true
 # users.image.max.size=307200
 # users.screen.name.always.autogenerate=true
-  web.server.display.node=true
+  web.server.display.node=false
+
+{% if web_server_hostname is not defined or  web_server_hostname == "" %}
+  web.server.host=
+  web.server.http.port=
+# web.server.https.port=
+  web.server.forwarded.host.header.enabled=true
+  web.server.forwarded.host.header=X-Forwarded-Host
+  web.server.forwarded.port.enabled=true
+  web.server.forwarded.port.header=X-Forwarded-Port
+  web.server.forwarded.protocol.enabled=true
+  web.server.forwarded.protocol.header=X-Forwarded-Proto
+  web.server.protocol=
+{% else %}
+  web.server.host={{ web_server_hostname }}
+  web.server.protocol=http
 # web.server.http.port=80
 # web.server.https.port=443
-# web.server.protocol=https
+{% endif %}
 
-# redirect.url.security.mode=domain
-  redirect.url.security.mode=ip
-  redirect.url.domains.allowed=
-  redirect.url.ips.allowed=127.0.0.1,{{ liferay_ip }},SERVER_IP
+  redirect.url.security.mode={{ security_mode }}
+{% if security_mode is defined and security_mode == "domain" %}
+  redirect.url.domains.allowed={{ domains_allowed }}
+{% endif %}
+{% if security_mode is defined and security_mode == "ip" %}
+  redirect.url.ips.allowed=127.0.0.1,{{ ips_allowed }},SERVER_IP
+{% endif %}
