@@ -56,6 +56,27 @@
   retries: 3
   when: new_liferay_dest is defined
 
+- name: Create a generic symbolic link for home
+  ansible.builtin.file:
+    src: "{{ liferay_home }}"
+    dest: "{{ liferay_dest }}/home"
+    owner: "{{ liferay_user }}"
+    group: "{{ liferay_group }}"
+    state: link
+    force: true
+  when: new_liferay_dest is defined
+
+- name: Create a generic symbolic link for tomcat
+  ansible.builtin.file:
+    src: "{{ liferay_tomcat_home }}"
+    dest: "{{ liferay_dest }}/tomcat"
+    owner: "{{ liferay_user }}"
+    group: "{{ liferay_group }}"
+    state: link
+    force: true
+  when: new_liferay_dest is defined
+
+
 - name: configure liferay instance - portal-ext.properties
   template:
     src: portal-ext.properties.j2
