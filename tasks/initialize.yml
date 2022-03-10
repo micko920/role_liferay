@@ -35,6 +35,15 @@
 
 - name: Ensure data directory exists
   file:
+    path: "{{ data_root }}"
+    owner: "root"
+    group: "root"
+    state: directory
+    mode: 0755
+    recurse: false
+
+- name: Ensure document library directory exists
+  file:
     path: "{{ liferay_document_library_root }}"
     owner: "{{ liferay_user }}"
     group: "{{ liferay_group }}"
